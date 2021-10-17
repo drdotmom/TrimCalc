@@ -2,14 +2,14 @@
 
 namespace TrimCalc
 {
-    public class Trimsheet
+    public class CalculateTrimsheet
     {
         public int Size;
         public int RowCount;
         public int Padding;
         public TrimParams[] Trims;
 
-        public Trimsheet(int textureSize, int rowsCount, int padding)
+        public CalculateTrimsheet(int textureSize, int rowsCount, int padding)
         {
             Size = textureSize;
             RowCount = rowsCount;
@@ -25,7 +25,7 @@ namespace TrimCalc
             }
         }
 
-        public Trimsheet(int textureSize, int padding, TrimParams[] rows)
+        public CalculateTrimsheet(int textureSize, int padding, TrimParams[] rows)
         {
             Size = textureSize;
             Padding = padding;

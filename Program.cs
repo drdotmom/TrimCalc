@@ -9,7 +9,7 @@ namespace TrimCalc
         {
             SpaceVIL.Common.CommonService.InitSpaceVILComponents();
             var mw = new MainWindow();
-            mw.Show(); 
+            mw.Show();
         }
     }
 }

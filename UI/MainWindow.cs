@@ -7,9 +7,13 @@ namespace TrimCalc.UI
 {
     public class MainWindow : ActiveWindow
     {
+        public List<TrimGroupTexture> Trims = new List<TrimGroupTexture>();
+        public TrimSheetParams Params;
+        
         public override void InitWindow()
         {
-            SetParameters(nameof(MainWindow), nameof(MainWindow), 800, 600);
+            // Main Window
+            SetParameters(nameof(MainWindow), "TrimSheet Builder", 800, 600);
             SetMinSize(400, 300);
             SetBackground(32, 34, 37);
 
@@ -20,12 +24,7 @@ namespace TrimCalc.UI
             var topBar = new HorizontalStack();
             topBar.SetStyle(Look.BarStyle());
             verticalMain.AddItem(topBar);
-            
-            var btn0 = new ButtonCore("Edit");
-            btn0.SetStyle(Look.ButtonStyle());
-            topBar.AddItem(btn0);
-            
-            
+
             // Work Area
             var workBenchLayout = new VerticalSplitArea();
             verticalMain.AddItem(workBenchLayout);
@@ -33,18 +32,42 @@ namespace TrimCalc.UI
             workBenchLayout.AssignLeftItem(trimDataLayout);
             
             // Layers
-            var stack = new UI_TrimStack(trimDataLayout);
-            // TextureSet
+            UI_TrimList layers = new UI_TrimList();
             
+            // TextureSet Area
+            var subLayout = new HorizontalSplitArea();
+            trimDataLayout.AssignBottomItem(subLayout);
+            
+            // Tex List
+            var texList = new UI_TrimGroup(this, subLayout, layers);
+            texList.Init();
+            
+            layers.Init(trimDataLayout, texList);
+            
+            // TrimSet Settings
+            var settings = new UI_TrimSettings(subLayout);
             
             // Bottom Bar
             var bottomBar = new HorizontalStack();
             bottomBar.SetStyle(Look.BarStyle());
-            bottomBar.AddItem(new Label("Bottom Bar"));
             verticalMain.AddItem(bottomBar);
+            var appendButton = new ButtonCore("Append");
+
+            appendButton.EventMouseClick = (sender, args) =>
+            {
+                var groups = layers.Groups;
+
+                foreach (var group in groups)
+                {
+                    Console.WriteLine("GROUP:");
+                    foreach (var image in group.GroupContent)
+                    {
+                        Console.WriteLine(image.FullPath);
+                    }
+                }
+            };
             
-            // Drag N Drop
-            
+            bottomBar.AddItem(appendButton);
         }
     }
 }

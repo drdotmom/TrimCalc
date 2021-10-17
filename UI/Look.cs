@@ -16,7 +16,7 @@ namespace TrimCalc.UI
         public static Color Hover = Color.FromArgb(30, 255, 255, 255);
         public static Color Focus = Color.FromArgb(20, 180, 180, 180);
         public static Color Press = Color.FromArgb(50, 255, 255, 255);
-        
+
         public static Color TextActiveColor = Color.FromArgb(255, 255, 255, 255);
         
         public static CornerRadius Corners = new CornerRadius(2);
@@ -71,7 +71,6 @@ namespace TrimCalc.UI
             style.SetBackground(Background.R, Background.G, Background.B, Background.A);
             style.Foreground = Color.FromArgb(TextActiveColor.R, TextActiveColor.G, TextActiveColor.B);
             style.BorderRadius = Corners;
-            //style.AddItemState(ItemStateType.Focused, new ItemState(Focus));
             style.SetSizePolicy(SizePolicy.Expand, SizePolicy.Expand);
 
             return style;
@@ -90,6 +89,38 @@ namespace TrimCalc.UI
             style.SetBorder(new Border());
             style.SetSizePolicy(SizePolicy.Expand, SizePolicy.Fixed);
             style.SetSize(128, 24);
+            
+            return style;
+        }
+        
+        internal static Style SettingsLabelStyle()
+        {
+            Style style = Style.GetLabelStyle();
+            style.SetBackground(ButtonBase.R, ButtonBase.G, ButtonBase.B, ButtonBase.A);
+            style.Foreground = Color.FromArgb(TextActiveColor.R, TextActiveColor.G, TextActiveColor.B);
+            style.BorderRadius = Corners;
+            style.AddItemState(ItemStateType.Hovered, new ItemState(Hover));
+            style.AddItemState(ItemStateType.Focused, new ItemState(Focus));
+            style.AddItemState(ItemStateType.Pressed, new ItemState(Press));
+            style.SetTextAlignment(ItemAlignment.HCenter, ItemAlignment.Left);
+            style.SetPadding(10, 4, 0, 0);
+            style.SetBorder(new Border());
+            style.SetSizePolicy(SizePolicy.Expand, SizePolicy.Fixed);
+            style.SetSize(128, 24);
+            
+            return style;
+        }
+        
+        internal static Style LineInputStyle()
+        {
+            Style style = Style.GetTextLineStyle();
+            style.SetBackground(255, 255, 255, 255);
+            style.Foreground = Color.FromArgb(255, TextActiveColor.R, TextActiveColor.G, TextActiveColor.B);
+            style.BorderRadius = Corners;
+            style.SetTextAlignment(ItemAlignment.HCenter, ItemAlignment.Left);
+            style.SetPadding(6, 0, 0, 0);
+            style.SetSizePolicy(SizePolicy.Expand, SizePolicy.Fixed);
+            style.SetSize(128, 32);
             
             return style;
         }
